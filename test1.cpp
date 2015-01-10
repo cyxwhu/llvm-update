@@ -1,12 +1,12 @@
 BasicBlock *ConFix::confixSplitEdge(BasicBlock *BB, BasicBlock *Succ, Pass *P,
                                     int &iCritical) {
-  unsigned SuccNum = GetSuccessorNumber(BB, Succ);
+  unsigned SuccNum = SuccessorNumber(BB, Succ);
  
   // If this is a critical edge, let SplitCriticalEdge do it.
   TerminatorInst *LatchTerm = BB->getTerminator();
   if (SplitCriticalEdge(LatchTerm, SuccNum, P)) {
     iCritical = 1;
-    return LatchTerm->getSuccessor(SuccNum);
+    return LatchTerm->SuccessorNumber(SuccNum);
   }
 
   // If the edge isn't critical, then BB has a single successor or Succ has a
